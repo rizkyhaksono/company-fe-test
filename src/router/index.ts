@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
+import { getCookie } from '@/libs/cookies';
 import HomeView from '@/views/visitor/HomeView.vue';
 import LoginView from '@/views/auth/LoginView.vue';
 import UserProfileView from '@/views/user/UserProfileView.vue';
@@ -52,6 +53,28 @@ const router = createRouter({
 			meta: { requiresAuth: true, requiresAdmin: true },
 		}
 	],
+});
+
+router.beforeEach((to, from, next) => {
+	if (to.matched.some(record => record.meta.requiresAuth)) {
+		if (!getCookie('company_token')) {
+			next({ name: 'login' });
+		}
+		else if (to.matched.some(record => record.meta.requiresAdmin)) {
+			if (getCookie('company_role') === 'admin') {
+				next();
+			}
+			else {
+				next({ name: 'home' });
+			}
+		}
+		else {
+			next();
+		}
+	}
+	else {
+		next();
+	}
 });
 
 export default router;
