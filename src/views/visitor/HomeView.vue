@@ -17,7 +17,7 @@
 						<div v-if="isDropdownOpen"
 							class="absolute right-0 mt-2 w-48 bg-white text-[#4e598c] rounded-lg shadow-xl py-2">
 							<a href="/profile" class="block px-4 py-2 hover:bg-gray-100">Profile</a>
-							<a v-if="isAdmin" href="/dashboard" class="block px-4 py-2 hover:bg-gray-100">Dashboard Admin</a>
+							<a v-if="isAdmin" href="/admin/dashboard" class="block px-4 py-2 hover:bg-gray-100">Dashboard Admin</a>
 							<button class="w-full text-left px-4 py-2 hover:bg-gray-100" @click="handleLogout">Logout</button>
 						</div>
 					</div>
@@ -26,7 +26,7 @@
 			</nav>
 		</header>
 
-		<div class="bg-white dark:bg-gray-800">
+		<div class="bg-white dark:bg-gray-900">
 			<!-- Hero Section -->
 			<section id="home" class="bg-[#4e598c] text-white h-96 flex items-center justify-center text-3xl font-bold">
 				<div class="text-center">
@@ -35,99 +35,54 @@
 				</div>
 			</section>
 
-			<!-- Event Section -->
-			<section id="services" class="py-20 dark:bg-gray-900 dark:text-white">
+			<!-- Banner Section -->
+			<section id="services" class="py-20 dark:bg-gray-900 dark:text-white px-10">
 				<div class="max-w-7xl mx-auto text-center mb-8">
 					<h2 class="text-3xl font-semibold mb-2">Event Terpopuler</h2>
 					<p class="text-gray-500 dark:text-gray-400">Yuk kepoin event yang lagi trending.</p>
 				</div>
+
 				<div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-					<!-- Event Card 1 -->
-					<div class="bg-white dark:bg-gray-700 rounded-lg shadow-md overflow-hidden">
-						<img src="/logo.png" alt="Event 1" class="w-full h-48 object-cover">
+					<p v-if="isLoading" class="text-center col-span-3">Loading...</p>
+					<div v-for="event in banners" :key="event.id"
+						class="bg-white dark:bg-gray-700 rounded-lg shadow-md overflow-hidden">
+						<img :src="event.image" :alt="event.title" class="w-full h-48 object-cover">
 						<div class="p-4">
-							<h3 class="text-lg font-semibold">FISIP UI NIGHT RUN</h3>
-							<p class="text-gray-500 dark:text-gray-400 text-sm mt-1">15 Feb 2025 - 15 Feb 2025</p>
-							<p class="text-gray-500 dark:text-gray-400 text-sm">Jalan Lingkar Universitas Indonesia</p>
-							<p class="text-sm mt-2">1500+ orang</p>
-						</div>
-					</div>
-					<!-- Event Card 2 -->
-					<div class="bg-white dark:bg-gray-700 rounded-lg shadow-md overflow-hidden">
-						<img src="/logo.png" alt="Event 2" class="w-full h-48 object-cover">
-						<div class="p-4">
-							<h3 class="text-lg font-semibold">Charm and Prosperity</h3>
-							<p class="text-gray-500 dark:text-gray-400 text-sm mt-1">24 Jan 2025 - 09 Feb 2025</p>
-							<p class="text-gray-500 dark:text-gray-400 text-sm">Main Atrium - Pluit Village</p>
-							<p class="text-sm mt-2">10000+ orang</p>
-						</div>
-					</div>
-					<!-- Event Card 3 -->
-					<div class="bg-white dark:bg-gray-700 rounded-lg shadow-md overflow-hidden">
-						<img src="/logo.png" alt="Event 3" class="w-full h-48 object-cover">
-						<div class="p-4">
-							<h3 class="text-lg font-semibold">Another K-POP Art & Illustration Market</h3>
-							<p class="text-gray-500 dark:text-gray-400 text-sm mt-1">19 Apr 2025 - 19 Apr 2025</p>
-							<p class="text-gray-500 dark:text-gray-400 text-sm">AD Premier, Jakarta Selatan</p>
-							<p class="text-sm mt-2">10000+ orang</p>
-						</div>
-					</div>
-					<!-- Event Card 4 -->
-					<div class="bg-white dark:bg-gray-700 rounded-lg shadow-md overflow-hidden">
-						<img src="/logo.png" alt="Event 4" class="w-full h-48 object-cover">
-						<div class="p-4">
-							<h3 class="text-lg font-semibold">House of Zaw Batch 7</h3>
-							<p class="text-gray-500 dark:text-gray-400 text-sm mt-1">04 Feb 2025 - 08 Feb 2025</p>
-							<p class="text-gray-500 dark:text-gray-400 text-sm">House of Zaw Jl Mangkuuyudan no 36 ...</p>
-							<p class="text-sm mt-2">10000+ orang</p>
-						</div>
-					</div>
-					<!-- Event Card 5 -->
-					<div class="bg-white dark:bg-gray-700 rounded-lg shadow-md overflow-hidden">
-						<img src="/logo.png" alt="Event 5" class="w-full h-48 object-cover">
-						<div class="p-4">
-							<h3 class="text-lg font-semibold">Votre Ville Food & Beverages</h3>
-							<p class="text-gray-500 dark:text-gray-400 text-sm mt-1">01 Mei 2025 - 04 Mei 2025</p>
-							<p class="text-gray-500 dark:text-gray-400 text-sm">Avenue of Star - Lippo Mall Kemang</p>
-							<p class="text-sm mt-2">10000+ orang</p>
-						</div>
-					</div>
-					<!-- Event Card 6 -->
-					<div class="bg-white dark:bg-gray-700 rounded-lg shadow-md overflow-hidden">
-						<img src="/logo.png" alt="Event 6" class="w-full h-48 object-cover">
-						<div class="p-4">
-							<h3 class="text-lg font-semibold">FISIP UI NIGHT RUN</h3>
-							<p class="text-gray-500 dark:text-gray-400 text-sm mt-1">15 Feb 2025 - 15 Feb 2025</p>
-							<p class="text-gray-500 dark:text-gray-400 text-sm">Jalan Lingkar Universitas Indonesia</p>
-							<p class="text-sm mt-2">1500+ orang</p>
+							<h3 class="text-lg font-semibold">{{ event.title }}</h3>
+							<p class="text-gray-500 dark:text-gray-400 text-sm mt-1">
+								{{ event.created_at }}
+							</p>
 						</div>
 					</div>
 				</div>
 			</section>
 
 			<!-- About Section -->
-			<section id="about" class="bg-gray-100 py-20 dark:bg-gray-800 dark:text-white">
-				<div class="max-w-7xl mx-auto text-center">
-					<h2 class="text-3xl font-semibold mb-6">About Us</h2>
-					<p class="text-lg">Our company is dedicated to providing top-notch technology solutions to help businesses
-						grow.
-						We believe in quality and innovation.</p>
+			<section id="about" class="bg-gray-100 py-20 dark:bg-gray-950 dark:text-white px-10">
+				<div v-for="description in descriptions" :key="description.id" class="max-w-7xl mx-auto text-center">
+					<h2 class="text-3xl font-semibold mb-6">Tentang Kami</h2>
+					<p class="text-lg">{{ description.content }}</p>
 				</div>
 			</section>
 
 			<!-- Contact Section -->
-			<section id="contact" class="py-20 dark:bg-gray-800 dark:text-white">
-				<div class="max-w-7xl mx-auto text-center">
-					<h2 class="text-3xl font-semibold mb-6">Contact Us</h2>
-					<p class="text-lg">Have any questions? Reach out to us, and we'll get back to you as soon as possible.</p>
-					<p class="mt-4">Email us at: <a href="mailto:info@company.com" class="text-blue-600 dark:text-blue-400">
-							info@company.com
-						</a></p>
+			<section id="contact" class="py-20 dark:bg-gray-900 dark:text-white px-10">
+				<div class="max-w-7xl mx-auto text-center mb-8">
+					<h2 class="text-3xl font-semibold mb-2">Hubungi Kami</h2>
+					<p class="text-gray-500 dark:text-gray-400">Ada pertanyaan? Jangan ragu untuk menghubungi kami.</p>
+				</div>
+
+				<div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+					<div v-for="contact in contacts" :key="contact.id" class="bg-white dark:bg-gray-700 rounded-lg shadow-md p-6">
+						<h3 class="text-lg font-semibold">{{ contact.name }}</h3>
+						<p class="text-gray-500 dark:text-gray-400 mt-2">{{ contact.email }}</p>
+						<p class="text-gray-500 dark:text-gray-400 text-sm">{{ contact.message }}</p>
+					</div>
 				</div>
 			</section>
 		</div>
 
-		<footer class="bg-[#4e598c] text-white py-12">
+		<footer class="bg-[#4e598c] text-white py-12 px-10">
 			<div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
 				<div>
 					<img src="/logo.png" alt="Logo" class="h-10 mb-4" />
@@ -176,16 +131,25 @@
 
 <script setup lang="ts">
 import { ref, watchEffect } from "vue";
-import axiosBase from "@/services/axiosBase";
 import { useRouter } from "vue-router";
+import axiosBase from "@/services/axiosBase";
 import Cookies from "js-cookie";
+
+const router = useRouter();
 
 const token = ref(Cookies.get("company_token") || "");
 const username = ref(null);
 const isAdmin = ref(false);
 const isDropdownOpen = ref(false);
 const isDarkMode = ref(false);
-const router = useRouter();
+
+const banners = ref([]);
+const descriptions = ref([]);
+const contacts = ref([]);
+const isLoading = ref(true);
+
+console.log(descriptions)
+console.log(contacts)
 
 const handleLogout = async () => {
 	Cookies.remove("company_token");
@@ -201,6 +165,27 @@ watchEffect(() => {
 	} else {
 		document.body.classList.remove('dark');
 	}
+
+	axiosBase.get(
+		"/banners"
+	).then((response) => {
+		banners.value = response.data.data;
+		isLoading.value = false;
+	});
+
+	axiosBase.get(
+		"/descriptions"
+	).then((response) => {
+		descriptions.value = response.data;
+		isLoading.value = false;
+	});
+
+	axiosBase.get(
+		"/contacts"
+	).then((response) => {
+		contacts.value = response.data;
+		isLoading.value = false;
+	});
 
 	if (token.value) {
 		axiosBase.get(
