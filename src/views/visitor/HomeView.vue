@@ -59,8 +59,9 @@
 
 			<!-- About Section -->
 			<section id="about" class="bg-gray-100 py-20 dark:bg-gray-950 dark:text-white px-10">
-				<div v-for="description in descriptions" :key="description.id" class="max-w-7xl mx-auto text-center">
-					<h2 class="text-3xl font-semibold mb-6">Tentang Kami</h2>
+				<h2 class="text-3xl font-semibold mb-6 text-center">Tentang Kami</h2>
+				<div v-for="description in descriptions" :key="description.id" class="max-w-7xl mx-auto flex items-center gap-8">
+					<p class="text-lg">-</p>
 					<p class="text-lg">{{ description.content }}</p>
 				</div>
 			</section>
@@ -88,14 +89,14 @@
 					<img src="/logo.png" alt="Logo" class="h-10 mb-4" />
 					<p class="font-bold text-lg">Hubungi Kami</p>
 					<div class="flex items-center mt-2">
-						<!-- <img src="/email.png" alt="Email Icon" class="h-6 w-6 mr-2"> -->
+						<img src="https://img.freepik.com/free-psd/phone-icon-design_23-2151311652.jpg" alt="Email Icon" class="h-6 w-6 mr-2 rounded-xl">
 						<div>
 							<p class="text-sm">Email</p>
 							<a href="mailto:support@haventwined.com" class="text-sm">support@haventwined.com</a>
 						</div>
 					</div>
 					<div class="flex items-center mt-2">
-						<!-- <img src="/whatsapp.png" alt="WhatsApp Icon" class="h-6 w-6 mr-2"> -->
+						<img src="https://img.freepik.com/free-psd/whatsapp-call-icon-psd-editable_314999-3666.jpg" alt="WhatsApp Icon" class="h-6 w-6 mr-2 rounded-xl">
 						<div>
 							<p class="text-sm">WhatsApp Customer Service</p>
 							<p class="text-sm">+62 822-9944-9708</p>
