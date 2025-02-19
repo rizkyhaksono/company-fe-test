@@ -17,5 +17,8 @@ export default defineConfig({
   },
   preview: {
     allowedHosts: ['company.natee.me'],
+  },
+  optimizeDeps: {
+    include: ['date-fns']
   }
 })
