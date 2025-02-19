@@ -74,7 +74,7 @@ export default {
         });
         if (response.data) {
           Cookies.set("company_token", response.data.token);
-          this.$router.push("/login");
+          this.$router.push("/");
         }
       } catch (error) {
         const err = error as Error;

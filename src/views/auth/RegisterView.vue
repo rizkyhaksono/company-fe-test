@@ -88,12 +88,9 @@ export default {
           email: this.email,
           password: this.password,
         });
-
-        console.log(response.data);
-
         if (response.data && response.data.data.token) {
           Cookies.set("company_token", response.data.data.token);
-          this.$router.push("/");
+          this.$router.push("/login");
         }
       } catch (error) {
         const err = error as Error;

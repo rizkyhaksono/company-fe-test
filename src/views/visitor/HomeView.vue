@@ -174,10 +174,12 @@ const isLoading = ref(true);
 
 const handleLogout = async () => {
 	Cookies.remove("company_token");
+	Cookies.remove("company_role");
 	await axiosBase.post("/logout", null, {
 		headers: { Authorization: `Bearer ${token.value}` },
 	});
 	router.push("/login");
+	router.go(0);
 };
 
 watchEffect(() => {
