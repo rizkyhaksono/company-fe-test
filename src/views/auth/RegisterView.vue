@@ -39,7 +39,8 @@
             </div>
 
             <div class="mb-4">
-              <label for="confirmPassword" class="block text-gray-700 text-sm font-bold mb-2">Konfirmasi Password *</label>
+              <label for="confirmPassword" class="block text-gray-700 text-sm font-bold mb-2">Konfirmasi Password
+                *</label>
               <input id="confirmPassword" v-model="confirmPassword" type="password" placeholder="Konfirmasi Password"
                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
             </div>
@@ -95,7 +96,8 @@ export default {
           this.$router.push("/");
         }
       } catch (error) {
-        this.errorMessage = error.response?.data?.message || "Registrasi gagal. Coba lagi.";
+        const err = error as Error;
+        this.errorMessage = err.message || "Registrasi gagal. Coba lagi.";
       }
     }
   },
