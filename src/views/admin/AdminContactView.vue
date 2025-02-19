@@ -85,7 +85,7 @@ export default {
     const isLoading = ref(false);
     const isModalOpen = ref(false);
     const isEditing = ref(false);
-    const contactForm = ref({ id: null, name: "", email: "", message: "" });
+    const contactForm = ref<{ id: number | null; name: string; email: string; message: string }>({ id: null, name: "", email: "", message: "" });
 
     // Fetch all contacts
     const fetchContacts = async () => {
@@ -114,16 +114,12 @@ export default {
     };
 
     // Open modal for editing or adding a contact
-    const openModal = (contact = null) => {
-      if (contact) {
-        isEditing.value = true;
-        contactForm.value = { ...contact };
-      } else {
-        isEditing.value = false;
-        contactForm.value = { id: null, name: "", email: "", message: "" };
-      }
+    const openModal = (contact: Partial<{ id: number; name: string; email: string; message: string }> | null = null) => {
+      isEditing.value = !!contact;
+      contactForm.value = { id: null, name: "", email: "", message: "", ...contact };
       isModalOpen.value = true;
     };
+
 
     // Update an existing contact
     const updateContact = async () => {
@@ -132,7 +128,9 @@ export default {
           headers: { Authorization: `Bearer ${token.value}` }
         });
         const index = contacts.value.findIndex(c => c.id === contactForm.value.id);
-        if (index !== -1) contacts.value[index] = { ...contactForm.value };
+        if (index !== -1 && contactForm.value.id !== null) {
+          contacts.value[index] = contactForm.value as { id: number; name: string; email: string; message: string };
+        }
         closeModal();
       } catch (error) {
         console.error("Error updating contact:", error);

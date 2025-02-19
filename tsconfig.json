@@ -9,10 +9,8 @@
     }
   ],
   "compilerOptions": {
-    "moduleResolution": "bundler",
-    "module": "ESNext",
-    "types": [
-      "node"
-    ]
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true
   }
 }

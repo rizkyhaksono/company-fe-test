@@ -5,7 +5,7 @@
       :class="['bg-gray-800 text-white transition-width duration-300', { 'w-16': isCollapsed, 'w-64': !isCollapsed }]">
       <div class="flex items-center justify-between p-4">
         <h2 v-if="!isCollapsed" class="text-lg font-semibold">Admin Dashboard</h2>
-        <button @click="toggleSidebar" class="text-white">
+        <button class="text-white" @click="toggleSidebar">
           <i class="fas fa-bars"></i>
         </button>
       </div>
@@ -36,15 +36,15 @@
 
       <!-- Quick Actions -->
       <div class="grid grid-cols-3 gap-4 mb-6">
-        <button class="p-4 bg-blue-600 text-white rounded-md shadow-md hover:bg-blue-700">
-          Add User
-        </button>
-        <button class="p-4 bg-green-600 text-white rounded-md shadow-md hover:bg-green-700">
-          Manage Content
-        </button>
-        <button class="p-4 bg-red-600 text-white rounded-md shadow-md hover:bg-red-700">
-          View Reports
-        </button>
+        <a class="p-4 bg-blue-600 text-white rounded-md shadow-md hover:bg-blue-700" href="/admin/dashboard/banner">
+          Banner
+        </a>
+        <a class="p-4 bg-green-600 text-white rounded-md shadow-md hover:bg-green-700" href="/admin/dashboard/contact">
+          Contact
+        </a>
+        <a class="p-4 bg-red-600 text-white rounded-md shadow-md hover:bg-red-700" href="/admin/dashboard/description">
+          Description
+        </a>
       </div>
 
       <!-- Recent Activities -->
@@ -76,7 +76,7 @@ export default {
     AdminSidebar,
   },
   setup() {
-    const users = ref([]); // Keep it an array for consistency
+    const users = ref<{ id: number; name: string; email: string; role: string }[]>([]);
     const isCollapsed = ref(false);
     const token = Cookies.get("company_token") || "";
 
@@ -85,12 +85,7 @@ export default {
         const response = await axiosBase.get("/user", {
           headers: { Authorization: `Bearer ${token}` },
         });
-
-        console.log("API Response:", response.data); // Debugging log
-
-        // Since response is an object, wrap it in an array
         users.value = [response.data];
-
       } catch (error) {
         console.error("Error fetching users:", error);
       }

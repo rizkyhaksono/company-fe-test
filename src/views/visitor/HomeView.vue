@@ -149,9 +149,6 @@ const descriptions = ref([]);
 const contacts = ref([]);
 const isLoading = ref(true);
 
-console.log(descriptions)
-console.log(contacts)
-
 const handleLogout = async () => {
 	Cookies.remove("company_token");
 	await axiosBase.post("/logout", null, {
