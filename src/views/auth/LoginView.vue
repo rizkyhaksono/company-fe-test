@@ -73,7 +73,7 @@ export default {
           password: this.password,
         });
         if (response.data) {
-          Cookies.set("company_token", response.data.token);
+          Cookies.set("company_token", response.data.data.token);
           this.$router.push("/");
         }
       } catch (error) {
